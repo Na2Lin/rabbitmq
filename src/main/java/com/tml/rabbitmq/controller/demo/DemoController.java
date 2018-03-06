@@ -18,6 +18,15 @@ public class DemoController {
 
     @RequestMapping("hello")
     public Map hello(@RequestParam Map map) {
+//        rabbitTemplate.convertAndSend("hello", map);
+        rabbitTemplate.convertAndSend("exchange1","topic.1", map);
+        rabbitTemplate.convertAndSend("exchange1","topic.2", map);
+        return map;
+    }
+
+
+    @RequestMapping("hello_topic")
+    public Map helloTopic(@RequestParam Map map) {
         rabbitTemplate.convertAndSend("hello", map);
         return map;
     }
